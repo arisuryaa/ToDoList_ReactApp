@@ -7,16 +7,16 @@ const Home = () => {
   const [database, setDatabase] = useState([
     {
       id: 1,
-      text: "aku ingin jadi kaya",
+      text: "aku akan jadi kaya",
     },
 
     {
       id: 2,
-      text: "aku ingin membuat semua orang kaget!",
+      text: "aku akan buktikan!",
     },
     {
       id: 3,
-      text: "aku ingin membuat semua orang kaget!",
+      text: "Tunggu aku!!!",
     },
   ]);
 
@@ -26,17 +26,24 @@ const Home = () => {
   };
 
   const addData = (datas) => {
-    console.log("OK");
+    const id = database.length + 1;
+    const newData = {
+      id: id,
+      text: datas,
+    };
+
+    return datas.length < 1 ? false : setDatabase([...database, newData]);
   };
 
   return (
     <div className="w-full h-screen flex flex-col bg-slate-300">
-      <div className="flex justify-center w-full pt-5">
-        <h1 className="text-4xl">To Do List Item</h1>
+      <div className="flex items-center w-full flex-col pt-5">
+        <h1 className="text-4xl font-semibold text-slate-500">To Do List Item</h1>
+        <h1 className="text-sm pt-3 font-semibold text-slate-500">by Dewa</h1>
       </div>
-      <div className="mt-5 flex flex-col gap-5 justify-center items-center w-full h-full">
+      <div className="mt-5 flex flex-col flex-wrap gap-5 justify-center items-center w-full h-full">
         {database.map((e, i) => (
-          <div className="w-1/2 bg-white h-12 rounded-md flex justify-between px-4 items-center" key={i}>
+          <div className="w-4/5 lg:w-1/2 bg-white h-fit py-3 rounded-md flex justify-between px-4 items-center" key={i}>
             <h2>{e.text}</h2>
             <div className="flex gap-2">
               <Button>Edit</Button>
@@ -46,7 +53,7 @@ const Home = () => {
             </div>
           </div>
         ))}
-        <Form></Form>
+        <Form submit={addData}></Form>
       </div>
     </div>
   );
